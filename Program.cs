@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using razer_demo_00.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<razer_demo_00Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("razer_demo_00Context") ?? throw new InvalidOperationException("Connection string 'razer_demo_00Context' not found.")));
 
 var app = builder.Build();
 
